@@ -1,81 +1,82 @@
-http://www.codeproject.com/Articles/38821/Make-a-poker-hand-evalutator-in-Java
+http://stackoverflow.com/questions/15942050/deck-of-cards-java
 
-package javapoker;
-public class Card{
-    private short rank, suit;
 
-    private static String[] suits = { "hearts", "spades", "diamonds", "clubs" };
-    private static String[] ranks  = { "Ace", "2", "3", "4", "5", "6", "7", 
-                   "8", "9", "10", "Jack", "Queen", "King" };
+public class DeckOfCards2 {
+  public static void main(String[] args) {
+    int[] deck = new int[52];
+    String[] suits = {"Spades", "Hearts", "Diamonds", "Clubs"};
+    String[] ranks = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
 
-    public static String rankAsString( int __rank ) {
-        return ranks[__rank];
+    // Initialize cards
+    for (int i = 0; i < deck.length; i++) {
+      deck[i] = i;
     }
 
-    Card(short suit, short rank)
-    {
-        this.rank=rank;
-        this.suit=suit;
+    // Shuffle the cards
+    for (int i = 0; i < deck.length; i++) {
+      int index = (int)(Math.random() * deck.length);
+      int temp = deck[i];
+      deck[i] = deck[index];
+      deck[index] = temp;
     }
 
-    public @Override String toString()
-    {
-          return ranks[rank] + " of " + suits[suit];
+    // Display the all the cards
+    for (int i = 0; i < 52; i++) {
+      String suit = suits[deck[i] / 13];
+      String rank = ranks[deck[i] % 13];
+      System.out.println( rank + " of " + suit);
     }
-
-    public short getRank() {
-         return rank;
-    }
-
-    public short getSuit() {
-        return suit;
-    }
+  }
 }
 
+-----------------------------------------------------------------------------------------------------------------
+public class DeckOfCards {
+  private Card theCard;
+  private int remainingCards = 52;
 
+  DeckOfCards() {
+    theCard = new Card();   
+  }
 
-package javapoker;
-import java.util.Random;import java.util.ArrayList;
-public class Deck {
-    private ArrayList<Card> cards;
+  public void shuffle(){
+    for (int i = 0; i < deck.length; i++) {
+       int index = (int)(Math.random() deck.length);
+       int temp = deck[i];
+       deck[i] = deck[index];
+       deck[index] = temp;
+       remainingCards--;
+     }
+  }
 
-    Deck()
-    {
-        cards = new ArrayList<Card>();
-        int index_1, index_2;
-        Random generator = new Random();
-        Card temp;
+  public void deal(){
+    for (int i = 0; i < 52; i++) {
+       String suit = suits[deck[i] / 13];
+       String rank = ranks[deck[i] % 13];
+       System.out.println( rank + " of " + suit);
+       System.out.println("Remaining cards: " + remainingCards);
+     }
+   }
+}
 
-        for (int a=1; a<=4; a++)
-        {
-            for (int b=1; b<=13; b++)
-             {
-               cards.add( new Card(a,b) );
-             }
-        }
+-----------------------------------------------------------------------------------------------------------------
+public class Card {
+  int[] deck = new int[52];
+  String[] suits = {"Spades", "Hearts", "Diamonds", "Clubs"};
+  String[] ranks = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
 
-       int size       
-
-        for (int i=0; i<100; i++)
-        {
-            index_1 = generator.nextInt( cards.size() - 1 );
-            index_2 = generator.nextInt( cards.size() - 1 );
-
-            temp = cards.get( index_2 );
-            cards.set( index_2 , cards.get( index_1 ) );
-            cards.set( index_1, temp );
-        }
+  Card() {
+    for (int i = 0; i < deck.length; i++) {
+      deck[i] = i;
     }
+  }
+}
 
-    public Card drawFromDeck()
-    {       
-        return cards.remove( 0 );
-    }
+-----------------------------------------------------------------------------------------------------------------
+public class Dealer {
+  public static void main(String[]args){
+    System.out.println("The deck will randomly print out a card from a full deck each time");
 
-    public int getTotalCards()
-    {
-        return cards.size();
-        //we could use this method when making 
-        //a complete poker game to see if we needed a new deck
-    }
+    DeckOfCards player = new DeckOfCards();
+    player.deal();
+  }
 }
