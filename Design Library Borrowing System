@@ -1,0 +1,118 @@
+package careercup.test.amazon;
+
+import java.util.Collection;
+
+/**
+ * 
+  design a library for borrowing books and renewing.
+	
+	1. On Borrowing
+	 	
+	 	Verify user validations .
+	 	perform borrowing 
+	 	
+	2. On renewal
+	   
+	    verify user validations
+	    perform renewal .
+	   
+	
+ * @author dileep
+ *
+ */
+public class LibraryForBooksBorrowing {
+
+	/**
+	 * 
+	 */
+	public void onBorrowing(Book book,User user){
+		// Do some validations
+		user.borrowBook(book);
+	}
+	
+	/**
+	 * 
+	 * @param b
+	 * @param user
+	 */
+	public void onRenewal(Book b, User user){
+		user.renewalBook(b);
+	}
+	
+	/**
+	 * 
+	 * @author dileep
+	 *
+	 */
+	private static class User{
+		private final long userId=0;
+
+		private Collection<Book> borrowedBooks;
+		
+		public void borrowBook(Book b){
+			borrowedBooks.add(b);
+		}
+		
+		public void renewalBook(Book b){
+			if(borrowedBooks.contains(b)){
+				// perform renewal operation .
+			}
+		}
+
+		public boolean isRenewalExceeded() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+		
+	}
+	
+	/**
+	 * 
+	 * @author dileep
+	 *
+	 */
+	private static class Book{
+		private final long UNIQUE_CODE= 0;
+	}
+	
+	/**
+	 * 
+	 * 1.Adds new Book backed by a store..
+	 * 2. Deletes ...
+	 * 
+	 * @author dileep
+	 *
+	 */
+	private static class BookStore{
+		
+		private Collection<Book> books;
+	}
+	
+	/**
+	 * performs User level operations .
+	 * 1. Adds a new User 
+	 * 2. Deleted existing User
+	 * 3. performs appropriate actions when lending date is reached ...
+	 * 		a) sends e-mail 
+	 *     b) calculates total fine .
+	 */
+	private static class Users{
+		
+		private Collection<User> allMembers;
+	
+		/**
+		 * iterate over all users , do checks on renewal..
+		 */
+		public void doThisEveryDay(){
+		
+			for(User user:allMembers){
+				
+				if(user.isRenewalExceeded()){
+					//Send e-mail 
+					// Calculate fine 
+				}
+			}
+		}
+		
+	}
+}
